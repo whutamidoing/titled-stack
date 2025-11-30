@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  authorId  Int
+  author    User    @relation(fields: [authorId], references: [id])
+}
+
+model City {
+  id              Int     @id @default(autoincrement())
+  cityName        String  @unique
+  country         String
+  xAxis           Float
+  yAxis           Float
+  zAxis           Float
+  productId       Int
+  regions         Region[]
+  demandedProduct Product @relation(fields: [productId], references: [id])
+}
+
+model Product {
+  id           Int    @id @default(autoincrement())
+  productName  String @unique
+  price        Int
+  quantitySold Int
+  demands      Demand[] @relation("ProductDemands")
+  city         City[]
+}
+
+model Region {
+  id              Int     @id @default(autoincrement())
+  name            String  @unique
+  population      Int
+  xTile           Int 
+  zTile           Int     
+  demands         Demand[] @relation("RegionToDemand")
+  cityId          Int    
+  city            City     @relation(fields: [cityId], references: [id])
+} 
+
+model Demand {
+  id              Int       @id @default(autoincrement())
+  cityName        String    @unique
+  product_name    String
+  demand_score    Int 
+  productId       Int?
+  product         Product?  @relation(fields: [productId], references: [id], name: "ProductDemands")
+  regionId        Int?
+  region          Region?   @relation(fields: [regionId], references: [id], name: "RegionToDemand")
+}
