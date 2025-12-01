@@ -26,13 +26,21 @@ export default function Dashboard({
     population: 0,
   });
 
-  useEffect(() => {
-    if (region) {
-      setForm({ name: region.name, population: region.population });
-    } else {
-      setForm({ name: "", population: 0 });
-    }
-  }, [region]);
+  // const [currentRegion, setRegion] = useState<Region | null>(region);
+  // useEffect(() => {
+  //   if (currentRegion != null) {
+  //     setForm({
+  //       name: currentRegion.name,
+  //       population: currentRegion.population,
+  //     });
+  //   } else {
+  //     setForm({ name: "", population: 0 });
+  //   }
+  // }, [region]);
+
+  // useEffect(() => {
+  //   setRegion(region);
+  // }, [region]);
 
   const handleCreate = async () => {
     if (tileKey == null) return;
@@ -53,32 +61,8 @@ export default function Dashboard({
     onCreate(newRegion);
   };
 
-  const handleUpdate = async () => {
-    if (!form.name || !form.population) return;
-
-    const res = await fetch("/api/regions${region.id}", {
-      method: "PUT",
-      body: JSON.stringify({
-        id: region?.id,
-        xTile: region?.xTile!,
-        zTile: region?.zTile!,
-        name: form.name,
-        population: form.population,
-        demands: region?.demands ?? [],
-      }),
-    });
-
-    if (!res.ok) {
-      console.error("Failed to update region");
-      return;
-    }
-
-    const thisRegion: Region = await res.json();
-    onUpdate(thisRegion);
-  };
-
   // region or null
-  const isOccupied = region;
+  const isOccupied = region !== null;
 
   return (
     <>
@@ -118,7 +102,7 @@ export default function Dashboard({
                   </ul>
                 ))}
               </div>
-              <DashForm />
+              <DashForm region={region} onUpdate={onUpdate} />
             </>
           ) : (
             <>

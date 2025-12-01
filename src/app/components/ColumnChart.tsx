@@ -1,20 +1,22 @@
+import { useEffect, useState } from "react";
 import { Region } from "@/app/types/Region";
 import { CartesianGrid, Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts";
-interface CardGridProps {
+interface ChartGridProps {
   region: Region;
 }
-export default function ColumnChart({ region }: CardGridProps) {
+export default function ColumnChart({ region }: ChartGridProps) {
   const topRegionDemands = region.demands
     .slice()
     .sort((a, b) => b.demand_score - a.demand_score)
     .slice(0, 3);
   const chartData = topRegionDemands.map((region) => ({
     name: region.product.productName,
+    price: region.product.price,
     demand_score: region.demand_score,
     quantity_sold: region.product.quantitySold,
   }));
   return (
-    <div className="max-w-sm w-full bg-neutral-primary-soft border border-amber-50/40 rounded-base shadow-xs p-4 md:p-6">
+    <div className="max-w-sm w-full bg-neutral-primary-soft border border-white rounded-base shadow-xs p-4 md:p-6 bg-white/10">
       <div className="flex justify-between pb-4 mb-4 border-b border-amber-50/40">
         <div className="flex items-center">
           <div className="w-12 h-12 bg-neutral-primary-medium border border-default-medium flex items-center justify-center rounded-full me-3">
@@ -29,8 +31,10 @@ export default function ColumnChart({ region }: CardGridProps) {
             </svg>
           </div>
           <div>
-            <h5 className="text-2xl font-semibold text-heading">3.4k</h5>
-            <p className="text-sm text-body">Leads generated per week</p>
+            <h5 className="text-2xl font-semibold text-heading">
+              {chartData.reduce((total, e) => total + e.quantity_sold, 0) ?? 0}
+            </h5>
+            <p className="text-sm text-body">Items sold per week</p>
           </div>
         </div>
         <div>
@@ -52,7 +56,21 @@ export default function ColumnChart({ region }: CardGridProps) {
                 d="M12 6v13m0-13 4 4m-4-4-4 4"
               />
             </svg>
-            42.5%
+            {(() => {
+              const totalQuantitySold = chartData.reduce(
+                (total, e) => total + e.quantity_sold,
+                0
+              );
+              const overallQuantitySold = region.demands.reduce(
+                (total, e) => total + e.product.quantitySold,
+                0
+              );
+              const percent =
+                overallQuantitySold === 0
+                  ? 0
+                  : (totalQuantitySold / overallQuantitySold) * 100;
+              return `${percent.toFixed(1)}%`;
+            })()}
           </span>
         </div>
       </div>
@@ -77,7 +95,13 @@ export default function ColumnChart({ region }: CardGridProps) {
       <div className="grid grid-cols-2">
         <dl className="flex items-center">
           <dt className="text-body text-sm font-normal me-1">Money spent:</dt>
-          <dd className="text-heading text-sm font-semibold">$3,232</dd>
+          <dd className="text-heading text-sm font-semibold">
+            $
+            {chartData.reduce(
+              (totalPrice, e) => totalPrice + e.quantity_sold * e.price,
+              0
+            )}
+          </dd>
         </dl>
         {/* <dl className="flex items-center justify-end">
           <dt className="text-body text-sm font-normal me-1">Conversion:</dt>

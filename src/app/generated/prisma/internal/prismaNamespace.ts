@@ -955,8 +955,6 @@ export type RegionScalarFieldEnum = (typeof RegionScalarFieldEnum)[keyof typeof 
 
 export const DemandScalarFieldEnum = {
   id: 'id',
-  cityName: 'cityName',
-  product_name: 'product_name',
   demand_score: 'demand_score',
   productId: 'productId',
   regionId: 'regionId'

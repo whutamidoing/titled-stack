@@ -42,8 +42,6 @@ export type DemandSumAggregateOutputType = {
 
 export type DemandMinAggregateOutputType = {
   id: number | null
-  cityName: string | null
-  product_name: string | null
   demand_score: number | null
   productId: number | null
   regionId: number | null
@@ -51,8 +49,6 @@ export type DemandMinAggregateOutputType = {
 
 export type DemandMaxAggregateOutputType = {
   id: number | null
-  cityName: string | null
-  product_name: string | null
   demand_score: number | null
   productId: number | null
   regionId: number | null
@@ -60,8 +56,6 @@ export type DemandMaxAggregateOutputType = {
 
 export type DemandCountAggregateOutputType = {
   id: number
-  cityName: number
-  product_name: number
   demand_score: number
   productId: number
   regionId: number
@@ -85,8 +79,6 @@ export type DemandSumAggregateInputType = {
 
 export type DemandMinAggregateInputType = {
   id?: true
-  cityName?: true
-  product_name?: true
   demand_score?: true
   productId?: true
   regionId?: true
@@ -94,8 +86,6 @@ export type DemandMinAggregateInputType = {
 
 export type DemandMaxAggregateInputType = {
   id?: true
-  cityName?: true
-  product_name?: true
   demand_score?: true
   productId?: true
   regionId?: true
@@ -103,8 +93,6 @@ export type DemandMaxAggregateInputType = {
 
 export type DemandCountAggregateInputType = {
   id?: true
-  cityName?: true
-  product_name?: true
   demand_score?: true
   productId?: true
   regionId?: true
@@ -199,8 +187,6 @@ export type DemandGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type DemandGroupByOutputType = {
   id: number
-  cityName: string
-  product_name: string
   demand_score: number
   productId: number | null
   regionId: number | null
@@ -231,8 +217,6 @@ export type DemandWhereInput = {
   OR?: Prisma.DemandWhereInput[]
   NOT?: Prisma.DemandWhereInput | Prisma.DemandWhereInput[]
   id?: Prisma.IntFilter<"Demand"> | number
-  cityName?: Prisma.StringFilter<"Demand"> | string
-  product_name?: Prisma.StringFilter<"Demand"> | string
   demand_score?: Prisma.IntFilter<"Demand"> | number
   productId?: Prisma.IntNullableFilter<"Demand"> | number | null
   regionId?: Prisma.IntNullableFilter<"Demand"> | number | null
@@ -242,8 +226,6 @@ export type DemandWhereInput = {
 
 export type DemandOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  cityName?: Prisma.SortOrder
-  product_name?: Prisma.SortOrder
   demand_score?: Prisma.SortOrder
   productId?: Prisma.SortOrderInput | Prisma.SortOrder
   regionId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -253,22 +235,18 @@ export type DemandOrderByWithRelationInput = {
 
 export type DemandWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  cityName?: string
   AND?: Prisma.DemandWhereInput | Prisma.DemandWhereInput[]
   OR?: Prisma.DemandWhereInput[]
   NOT?: Prisma.DemandWhereInput | Prisma.DemandWhereInput[]
-  product_name?: Prisma.StringFilter<"Demand"> | string
   demand_score?: Prisma.IntFilter<"Demand"> | number
   productId?: Prisma.IntNullableFilter<"Demand"> | number | null
   regionId?: Prisma.IntNullableFilter<"Demand"> | number | null
   product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
   region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
-}, "id" | "cityName">
+}, "id">
 
 export type DemandOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  cityName?: Prisma.SortOrder
-  product_name?: Prisma.SortOrder
   demand_score?: Prisma.SortOrder
   productId?: Prisma.SortOrderInput | Prisma.SortOrder
   regionId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -284,16 +262,12 @@ export type DemandScalarWhereWithAggregatesInput = {
   OR?: Prisma.DemandScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DemandScalarWhereWithAggregatesInput | Prisma.DemandScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Demand"> | number
-  cityName?: Prisma.StringWithAggregatesFilter<"Demand"> | string
-  product_name?: Prisma.StringWithAggregatesFilter<"Demand"> | string
   demand_score?: Prisma.IntWithAggregatesFilter<"Demand"> | number
   productId?: Prisma.IntNullableWithAggregatesFilter<"Demand"> | number | null
   regionId?: Prisma.IntNullableWithAggregatesFilter<"Demand"> | number | null
 }
 
 export type DemandCreateInput = {
-  cityName: string
-  product_name: string
   demand_score: number
   product?: Prisma.ProductCreateNestedOneWithoutDemandsInput
   region?: Prisma.RegionCreateNestedOneWithoutDemandsInput
@@ -301,16 +275,12 @@ export type DemandCreateInput = {
 
 export type DemandUncheckedCreateInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   productId?: number | null
   regionId?: number | null
 }
 
 export type DemandUpdateInput = {
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   product?: Prisma.ProductUpdateOneWithoutDemandsNestedInput
   region?: Prisma.RegionUpdateOneWithoutDemandsNestedInput
@@ -318,8 +288,6 @@ export type DemandUpdateInput = {
 
 export type DemandUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   regionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -327,23 +295,17 @@ export type DemandUncheckedUpdateInput = {
 
 export type DemandCreateManyInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   productId?: number | null
   regionId?: number | null
 }
 
 export type DemandUpdateManyMutationInput = {
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DemandUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   regionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -361,8 +323,6 @@ export type DemandOrderByRelationAggregateInput = {
 
 export type DemandCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  cityName?: Prisma.SortOrder
-  product_name?: Prisma.SortOrder
   demand_score?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
@@ -377,8 +337,6 @@ export type DemandAvgOrderByAggregateInput = {
 
 export type DemandMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  cityName?: Prisma.SortOrder
-  product_name?: Prisma.SortOrder
   demand_score?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
@@ -386,8 +344,6 @@ export type DemandMaxOrderByAggregateInput = {
 
 export type DemandMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  cityName?: Prisma.SortOrder
-  product_name?: Prisma.SortOrder
   demand_score?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
@@ -493,16 +449,12 @@ export type NullableIntFieldUpdateOperationsInput = {
 }
 
 export type DemandCreateWithoutProductInput = {
-  cityName: string
-  product_name: string
   demand_score: number
   region?: Prisma.RegionCreateNestedOneWithoutDemandsInput
 }
 
 export type DemandUncheckedCreateWithoutProductInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   regionId?: number | null
 }
@@ -538,24 +490,18 @@ export type DemandScalarWhereInput = {
   OR?: Prisma.DemandScalarWhereInput[]
   NOT?: Prisma.DemandScalarWhereInput | Prisma.DemandScalarWhereInput[]
   id?: Prisma.IntFilter<"Demand"> | number
-  cityName?: Prisma.StringFilter<"Demand"> | string
-  product_name?: Prisma.StringFilter<"Demand"> | string
   demand_score?: Prisma.IntFilter<"Demand"> | number
   productId?: Prisma.IntNullableFilter<"Demand"> | number | null
   regionId?: Prisma.IntNullableFilter<"Demand"> | number | null
 }
 
 export type DemandCreateWithoutRegionInput = {
-  cityName: string
-  product_name: string
   demand_score: number
   product?: Prisma.ProductCreateNestedOneWithoutDemandsInput
 }
 
 export type DemandUncheckedCreateWithoutRegionInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   productId?: number | null
 }
@@ -588,62 +534,46 @@ export type DemandUpdateManyWithWhereWithoutRegionInput = {
 
 export type DemandCreateManyProductInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   regionId?: number | null
 }
 
 export type DemandUpdateWithoutProductInput = {
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   region?: Prisma.RegionUpdateOneWithoutDemandsNestedInput
 }
 
 export type DemandUncheckedUpdateWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   regionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DemandUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   regionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DemandCreateManyRegionInput = {
   id?: number
-  cityName: string
-  product_name: string
   demand_score: number
   productId?: number | null
 }
 
 export type DemandUpdateWithoutRegionInput = {
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   product?: Prisma.ProductUpdateOneWithoutDemandsNestedInput
 }
 
 export type DemandUncheckedUpdateWithoutRegionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DemandUncheckedUpdateManyWithoutRegionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  cityName?: Prisma.StringFieldUpdateOperationsInput | string
-  product_name?: Prisma.StringFieldUpdateOperationsInput | string
   demand_score?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -652,8 +582,6 @@ export type DemandUncheckedUpdateManyWithoutRegionInput = {
 
 export type DemandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  cityName?: boolean
-  product_name?: boolean
   demand_score?: boolean
   productId?: boolean
   regionId?: boolean
@@ -663,8 +591,6 @@ export type DemandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 
 export type DemandSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  cityName?: boolean
-  product_name?: boolean
   demand_score?: boolean
   productId?: boolean
   regionId?: boolean
@@ -674,8 +600,6 @@ export type DemandSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type DemandSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  cityName?: boolean
-  product_name?: boolean
   demand_score?: boolean
   productId?: boolean
   regionId?: boolean
@@ -685,14 +609,12 @@ export type DemandSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type DemandSelectScalar = {
   id?: boolean
-  cityName?: boolean
-  product_name?: boolean
   demand_score?: boolean
   productId?: boolean
   regionId?: boolean
 }
 
-export type DemandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cityName" | "product_name" | "demand_score" | "productId" | "regionId", ExtArgs["result"]["demand"]>
+export type DemandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "demand_score" | "productId" | "regionId", ExtArgs["result"]["demand"]>
 export type DemandInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.Demand$productArgs<ExtArgs>
   region?: boolean | Prisma.Demand$regionArgs<ExtArgs>
@@ -714,8 +636,6 @@ export type $DemandPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    cityName: string
-    product_name: string
     demand_score: number
     productId: number | null
     regionId: number | null
@@ -1145,8 +1065,6 @@ export interface Prisma__DemandClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface DemandFieldRefs {
   readonly id: Prisma.FieldRef<"Demand", 'Int'>
-  readonly cityName: Prisma.FieldRef<"Demand", 'String'>
-  readonly product_name: Prisma.FieldRef<"Demand", 'String'>
   readonly demand_score: Prisma.FieldRef<"Demand", 'Int'>
   readonly productId: Prisma.FieldRef<"Demand", 'Int'>
   readonly regionId: Prisma.FieldRef<"Demand", 'Int'>

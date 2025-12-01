@@ -1,7 +1,54 @@
-export default function DashForm() {
+import { Region } from "@/app/types/Region";
+import { useState, useEffect } from "react";
+
+interface DashFormProps {
+  region: Region | null;
+  onUpdate: (region: Region) => void;
+}
+
+export default function DashForm({ region, onUpdate }: DashFormProps) {
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    quantitySold: "",
+    demandScore: "",
+  });
+
+  const handleAddProduct = async () => {
+    if (region == null) {
+      console.log("Form failed");
+      return;
+    }
+    console.log("Region passed to DashForm:", region);
+    const res = await fetch(`/api/products`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        price: parseFloat(form.price),
+        quantitySold: parseInt(form.quantitySold),
+        demandScore: parseInt(form.demandScore),
+        regionId: region?.id,
+      }),
+    });
+    if (!res.ok) {
+      console.error("Failed to update region");
+      return;
+    }
+
+    const updatedRegion: Region = await res.json();
+    setForm({ name: "", price: "", quantitySold: "", demandScore: "" });
+    onUpdate(updatedRegion);
+  };
+
   return (
     <>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAddProduct();
+        }}
+      >
         <div className="space-y-12">
           <div className="border-b border-white/10 pb-12">
             <h2 className="text-base/7 font-semibold text-white">
@@ -16,7 +63,8 @@ export default function DashForm() {
                   <input
                     id="name"
                     type="text"
-                    name="name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="ex. Coffee"
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
@@ -31,7 +79,13 @@ export default function DashForm() {
                   <input
                     id="price"
                     type="number"
-                    name="price"
+                    value={form.price}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        price: e.target.value,
+                      })
+                    }
                     placeholder="ex. 100"
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 overflow-hidden"
                   />
@@ -46,7 +100,13 @@ export default function DashForm() {
                   <input
                     id="quantity-sold"
                     type="number"
-                    name="quantity-sold"
+                    value={form.quantitySold}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        quantitySold: e.target.value,
+                      })
+                    }
                     placeholder="ex. 72"
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
@@ -61,7 +121,13 @@ export default function DashForm() {
                   <input
                     id="demand"
                     type="number"
-                    name="demand"
+                    value={form.demandScore}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        demandScore: e.target.value,
+                      })
+                    }
                     placeholder="ex. 100"
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
@@ -80,7 +146,7 @@ export default function DashForm() {
           </button>
           <button
             type="submit"
-            className="rounded-md bg-indigo-500 hover:bg-indigo-400 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer transition-colors"
+            className="rounded-md bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-800 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer transition-colors"
           >
             Add
           </button>

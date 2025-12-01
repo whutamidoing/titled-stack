@@ -59,8 +59,6 @@ model Region {
 
 model Demand {
   id              Int       @id @default(autoincrement())
-  cityName        String    @unique
-  product_name    String
   demand_score    Int 
   productId       Int?
   product         Product?  @relation(fields: [productId], references: [id], name: "ProductDemands")

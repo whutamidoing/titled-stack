@@ -83,7 +83,8 @@ export default function Home() {
   };
   const updateRegion = (region: Region) => {
     if (!region.id) return;
-    setRegions((prev) => ({ ...prev, [region.id as number]: region }));
+    const key = region.id?.toString() ?? `${region.xTile}-${region.zTile}`;
+    setRegions((prev) => ({ ...prev, [key]: region }));
   };
   const deleteRegion = (regionId: string) => {
     setRegions((prev) => {
