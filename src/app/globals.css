@@ -72,10 +72,6 @@ main {
   /* height: 200vh; */
 }
 
-.container {
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
 .scene-container {
   flex: 2;
   height: 100%;
@@ -112,20 +108,21 @@ main {
   direction: ltr;
 }
 .dashboard::-webkit-scrollbar {
-  width: 12px;
+  width: 6px;
   height: auto;
 }
 
 .dashboard::-webkit-scrollbar-track {
-  background: #1502349a;
+  background: #0000009a;
   border-radius: 10px;
+  transition: 400ms ease-in-out;
 }
 
 .dashboard::-webkit-scrollbar-thumb {
-  background: #2e2e2e;
+  background: #ff70c1a3;
   border-radius: 10px;
 }
 
 .dashboard::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #ff70c178;
 }

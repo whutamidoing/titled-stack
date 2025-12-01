@@ -13,6 +13,13 @@ export async function GET(req: Request) {
     // Filter by city
     const regions = await prisma.region.findMany({
       where: { city: { cityName: city } },
+      include: {
+        demands: {
+          include: {
+            product: true,
+          },
+        },
+      },
     });
 
     return NextResponse.json(regions);

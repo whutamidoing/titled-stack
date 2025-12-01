@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Region } from "@/app/types/Region";
 import { Product } from "@/app/types/Region";
+import ColumnChart from "@/app/components/ColumnChart";
+import CardGrid from "@/app/components/CardGrid";
+import DashForm from "./DashForm";
 
 type DashboardProps = {
   region: Region | null;
@@ -61,7 +64,7 @@ export default function Dashboard({
         zTile: region?.zTile!,
         name: form.name,
         population: form.population,
-        products: region?.products ?? [],
+        demands: region?.demands ?? [],
       }),
     });
 
@@ -77,14 +80,6 @@ export default function Dashboard({
   // region or null
   const isOccupied = region;
 
-  const totalDemandScore = () => {
-    let total = 0;
-    region?.products.forEach((element) => {
-      total += element.demand;
-    });
-    return total;
-  };
-
   return (
     <>
       <div className="dashboard bg-[linear-gradient(120deg,#020013,#3f0834)] right-0 pt-20 p-6">
@@ -93,8 +88,8 @@ export default function Dashboard({
           {isOccupied ? (
             <>
               <h1 className="font-bold text-4xl">{region?.name}</h1>
-              <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] p-4 rounded-4xl  border-2 border-black">
-                <div>
+              <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] rounded-4xl  border-2 border-black">
+                {/* <div>
                   <h2 className="text-xl">Population:</h2>
                   <span className="">{region?.population}</span>
                 </div>
@@ -105,34 +100,25 @@ export default function Dashboard({
                 <div>
                   <h2 className="text-xl">Number of Tracked Products:</h2>
                   <span className="">{region?.products.length}</span>
-                </div>
+                </div> */}
+                <CardGrid region={region} />
               </div>
               <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] p-4 rounded-4xl  border-2 border-black">
-                <div>
-                  <h1 className="font-bold text-2xl">Top Products</h1>
-                  {(region?.products ?? [])
-                    .sort((a: Product, b: Product) => b.demand - a.demand)
-                    .slice(0, 3)
-                    .map((p: Product, i: number) => (
-                      <div key={i}>
-                        <h2 className="text-xl">
-                          {i}.{p.name} - {p.demand}
-                        </h2>
-                      </div>
-                    ))}
-                </div>
-                <div>{/* Bar chart thing */}</div>
+                <h1 className="font-bold text-2xl">Top Products</h1>
+                <ColumnChart />
               </div>
               <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] p-4 rounded-4xl  border-2 border-black">
                 <h1 className="font-bold text-2xl">All Products</h1>
-                {(region?.products ?? []).map((p: Product, i: number) => (
-                  <div key={i}>
-                    <h2 className="text-xl">
-                      {i}.{p.name} - {p.demand}
-                    </h2>
-                  </div>
+                {(region?.demands ?? []).map((p, i: number) => (
+                  <ul key={i}>
+                    <li className="text-xl">
+                      {i + 1}. {p.product.productName} - {p.demand_score} /
+                      Total Sold: {p.product.quantitySold}
+                    </li>
+                  </ul>
                 ))}
               </div>
+              <DashForm />
             </>
           ) : (
             <>

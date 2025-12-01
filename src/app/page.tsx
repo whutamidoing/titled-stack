@@ -30,7 +30,7 @@ export default function Home() {
           id: r.id,
           name: r.name,
           population: r.population,
-          products: r.products ?? [],
+          demands: r.demands ?? [],
           xTile: r.xTile,
           zTile: r.zTile,
         };
@@ -105,7 +105,7 @@ export default function Home() {
           id="hero"
           className="w-full h-screen flex flex-row items-center"
         >
-          <div className="container flex flex-col gap-12 pt-40 pb-24 z-1 w-full h-fit">
+          <div className="ml-12 mr-12 flex flex-col gap-12 pt-40 pb-24 z-1 w-full h-fit">
             <div className="flex items-start flex-col text-white w-full">
               <h1 className="text-white text-2xl mb-4 [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:white]">
                 Hello you,
