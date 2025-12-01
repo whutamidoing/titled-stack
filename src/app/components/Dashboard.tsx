@@ -105,7 +105,7 @@ export default function Dashboard({
               </div>
               <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] p-4 rounded-4xl  border-2 border-black">
                 <h1 className="font-bold text-2xl">Top Products</h1>
-                <ColumnChart />
+                <ColumnChart region={region} />
               </div>
               <div className="stats m-4 flex flex-col gap-4 mb-12 bg-[linear-gradient(45deg,#020013,#1f0214)] p-4 rounded-4xl  border-2 border-black">
                 <h1 className="font-bold text-2xl">All Products</h1>

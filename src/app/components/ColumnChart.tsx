@@ -1,4 +1,18 @@
-export default function ColumnChart() {
+import { Region } from "@/app/types/Region";
+import { CartesianGrid, Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts";
+interface CardGridProps {
+  region: Region;
+}
+export default function ColumnChart({ region }: CardGridProps) {
+  const topRegionDemands = region.demands
+    .slice()
+    .sort((a, b) => b.demand_score - a.demand_score)
+    .slice(0, 3);
+  const chartData = topRegionDemands.map((region) => ({
+    name: region.product.productName,
+    demand_score: region.demand_score,
+    quantity_sold: region.product.quantitySold,
+  }));
   return (
     <div className="max-w-sm w-full bg-neutral-primary-soft border border-amber-50/40 rounded-base shadow-xs p-4 md:p-6">
       <div className="flex justify-between pb-4 mb-4 border-b border-amber-50/40">
@@ -32,9 +46,9 @@ export default function ColumnChart() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 6v13m0-13 4 4m-4-4-4 4"
               />
             </svg>
@@ -42,16 +56,33 @@ export default function ColumnChart() {
           </span>
         </div>
       </div>
-
+      <div className="">
+        <BarChart
+          data={chartData}
+          width={300}
+          height={200}
+          baseValue={10}
+          barGap={2}
+          barCategoryGap={2}
+        >
+          <Bar yAxisId="left" dataKey="quantity_sold" fill="#4102ff" />
+          <Bar yAxisId="right" dataKey="demand_score" fill="#23ffab" />
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis yAxisId="left" orientation="left" /> {/* for demand_score */}
+          <YAxis yAxisId="right" orientation="right" /> {/* for quantitySold */}
+          <Tooltip />
+        </BarChart>
+      </div>
       <div className="grid grid-cols-2">
         <dl className="flex items-center">
           <dt className="text-body text-sm font-normal me-1">Money spent:</dt>
           <dd className="text-heading text-sm font-semibold">$3,232</dd>
         </dl>
-        <dl className="flex items-center justify-end">
+        {/* <dl className="flex items-center justify-end">
           <dt className="text-body text-sm font-normal me-1">Conversion:</dt>
           <dd className="text-heading text-sm font-semibold">1.2%</dd>
-        </dl>
+        </dl> */}
       </div>
       <div id="column-chart"></div>
     </div>
