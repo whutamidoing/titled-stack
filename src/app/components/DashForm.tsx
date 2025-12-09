@@ -24,7 +24,7 @@ export default function DashForm({ region, onUpdate }: DashFormProps) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: form.name,
+        productName: form.name,
         price: parseFloat(form.price),
         quantitySold: parseInt(form.quantitySold),
         demandScore: parseInt(form.demandScore),
@@ -138,12 +138,6 @@ export default function DashForm({ region, onUpdate }: DashFormProps) {
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button
-            type="button"
-            className="text-sm/6 font-semibold text-white cursor-pointer"
-          >
-            Cancel
-          </button>
           <button
             type="submit"
             className="rounded-md bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-800 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer transition-colors"

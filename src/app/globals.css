@@ -71,6 +71,9 @@ body {
 main {
   /* height: 200vh; */
 }
+.hero {
+  /* box-shadow: 0px -5px 10px 10px #000; */
+}
 
 .scene-container {
   flex: 2;
@@ -125,4 +128,7 @@ main {
 
 .dashboard::-webkit-scrollbar-thumb:hover {
   background: #ff70c178;
+}
+.edit {
+  font-size: 0.8rem;
 }

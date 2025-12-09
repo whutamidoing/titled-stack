@@ -17,4 +17,5 @@ export interface Region {
   demands: Demand[];
   xTile: number;
   zTile: number;
+  cityId: number;
 }

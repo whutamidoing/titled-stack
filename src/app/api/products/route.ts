@@ -7,9 +7,9 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     console.log("Body received:", body);
-    const { name, price, quantitySold, demandScore, regionId } = body;
+    const { productName, price, quantitySold, demandScore, regionId } = body;
 
-    if (!name || !demandScore || !regionId) {
+    if (!productName || !demandScore || !regionId) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -25,13 +25,13 @@ export async function POST(req: Request) {
 
     // check if product already exists
     let product = await prisma.product.findUnique({
-      where: { productName: name },
+      where: { productName: productName },
     });
 
     if (!product) {
       // create product if it doesn't exist
       product = await prisma.product.create({
-        data: { productName: name, price, quantitySold },
+        data: { productName: productName, price, quantitySold },
       });
     }
 

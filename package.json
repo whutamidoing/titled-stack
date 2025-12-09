@@ -35,6 +35,7 @@
     "eslint-config-next": "16.0.1",
     "prisma": "^6.19.0",
     "recharts": "^3.5.1",
+    "supabase": "^2.64.2",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
     "typescript": "^5"

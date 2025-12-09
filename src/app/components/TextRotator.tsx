@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 export default function DropTextRotator() {
   const words = [
-    "Game Development",
-    "3D Modeling",
-    "Web Development",
-    "Video Editing",
+    "Today's Trends",
+    "Sales Data",
+    "Buyer Behaviour",
+    "In Demand Items",
   ];
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);

@@ -33,6 +33,7 @@ export default function Home() {
           demands: r.demands ?? [],
           xTile: r.xTile,
           zTile: r.zTile,
+          cityId: r.cityId,
         };
       });
       setRegions(map);
@@ -109,21 +110,28 @@ export default function Home() {
           <div className="ml-12 mr-12 flex flex-col gap-12 pt-40 pb-24 z-1 w-full h-fit">
             <div className="flex items-start flex-col text-white w-full">
               <h1 className="text-white text-2xl mb-4 [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:white]">
-                Hello you,
+                Welcome,
               </h1>
-              <span className="hover:text-transparent mb-5 text-7xl [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:white] transition-all">
-                I like doing
+              <span className="hover:text-transparent mb-5 text-4xl [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:white] transition-all">
+                Start analyzing:
               </span>
               <div className="relative w-full h-16">
                 <DropTextRotator />
               </div>
             </div>
             <div className="flex flex-col text-white w-full">
-              <p className="text-2xl mb-5 w-[40%]">
-                a website by rayben...
-                <br /> for my portfolio
+              <p className="text-xl mb-5 w-[40%]">
+                A Smarter Way to Manage Your Data.
+                <br /> “Fast, accurate, and simple”
               </p>
-              <button className="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-r-4 border-purple-700 hover:border-purple-500 rounded w-fit transition-colors">
+              <button
+                className="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-r-4 border-purple-700 hover:border-purple-500 rounded w-fit transition-colors cursor-pointer"
+                onClick={() =>
+                  document
+                    .querySelector(".scene-container")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
                 Go to Globe
               </button>
             </div>

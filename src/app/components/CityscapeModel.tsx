@@ -62,13 +62,14 @@ export default function CityscapeModel({
                 region.zTile! * size - size,
               ]}
               onPointerOver={(e) => {
+                e.stopPropagation();
                 setHoveredTiles((prev) => ({ ...prev, [key]: true }));
               }}
               onPointerOut={(e) => {
+                e.stopPropagation();
                 setHoveredTiles((prev) => ({ ...prev, [key]: false }));
               }}
               onPointerDown={(e) => {
-                e.stopPropagation();
                 setActiveTile(key);
               }}
             >

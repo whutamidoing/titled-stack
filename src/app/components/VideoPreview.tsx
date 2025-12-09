@@ -5,7 +5,7 @@ export default function VideoPreview() {
 
   useEffect(() => {
     async function loadVideo() {
-      const response = await fetch("/videos/prev2.mp4");
+      const response = await fetch("/videos/professional.mp4");
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       setVideoURL(url);
